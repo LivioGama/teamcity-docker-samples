@@ -18,6 +18,8 @@ services:
       - POSTGRES_USER=teamcity_user
       - POSTGRES_DB=teamcity_db
       - PG_DATA=/var/lib/postgresql/data
+      - GRADLE_OPTS=${GRADLE_OPTS}
+      - KOTLIN_DAEMON_JVM_OPTIONS=${KOTLIN_DAEMON_JVM_OPTIONS}
     volumes:
       - ./buildserver_pgdata:/var/lib/postgresql/data
     ports:
@@ -43,6 +45,9 @@ services:
       - AGENT_NAME=agent-1
       - DOCKER_IN_DOCKER=start
       - SERVER_URL=http://teamcity:8111
+      - GRADLE_OPTS=${GRADLE_OPTS}
+      - KOTLIN_DAEMON_JVM_OPTIONS=${KOTLIN_DAEMON_JVM_OPTIONS}
+      
   teamcity-agent-2:
     image: jetbrains/teamcity-agent:latest
     privileged: true
@@ -53,6 +58,8 @@ services:
       - AGENT_NAME=agent-2
       - DOCKER_IN_DOCKER=start
       - SERVER_URL=http://teamcity:8111
+      - GRADLE_OPTS=${GRADLE_OPTS}
+      - KOTLIN_DAEMON_JVM_OPTIONS=${KOTLIN_DAEMON_JVM_OPTIONS}
 
 volumes:
   buildserver_pgdata:
